@@ -1,0 +1,29 @@
+Building this project requires Maven 2.x. Additionally, it also requires that
+you have installed a version of libthrift.jar in your local maven repo. This
+can be accomplished by downloading one of the instant releases, building it,
+and then running the following command:
+
+  mvn install:install-file -Dfile=lib/java/libthrift.jar -DgroupId=org.apache -DartifactId=thrift -Dversion=1.0 -Dpackaging=jar
+
+With these steps accomplished, you can build the project by running:
+
+  mvn clean package
+
+From within the current directory.
+
+This will build a server executable and a client executable. To start the server do:
+
+  java -jar Server/target/BidiMessages.Server-0.9-jar-with-dependencies.jar 10101
+
+Which will start the server on port 10101.
+
+To start a client do:
+
+  java -jar Client/target/BidiMessages.Client-0.9-jar-with-dependencies.jar client1 localhost 10101
+
+This will start a client with the name client1 that connects to the server running on localhost at port 10101.
+
+You can start as many clients as you'd like (just make sure you give them different names so you can
+tell who sent what message).
+
+Currently the client just sends 100 numbered messages and then stops.

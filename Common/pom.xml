@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>BidiMessages</artifactId>
+    <groupId>com.joelpm</groupId>
+    <version>0.9</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.joelpm</groupId>
+  <artifactId>BidiMessages.Common</artifactId>
+  <name>BidiMessages Common</name>
+  <version>0.9</version>
+  <description>Common code for bi-directional thrift example.</description>
+  
+  <dependencies>
+    <dependency>
+       <groupId>org.apache</groupId>
+       <artifactId>thrift</artifactId>
+       <version>1.0</version>
+    </dependency>
+  </dependencies>
+  
+  <profiles>
+    <profile>
+      <id>profile-buildthrift</id>
+      <activation>
+        <file>
+          <exists>/usr/local/bin/thrift</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>generate-sources</id>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <tasks>
+                    <mkdir dir="target/generated-sources" />
+                    <exec executable="/usr/local/bin/thrift">
+                      <arg value="--gen" />
+                      <arg value="java:beans"/>
+                      <arg value="-o"/>
+                      <arg value="target/generated-sources"/>
+                      <arg value="src/main/resources/BidiMessages.thrift"/>
+                    </exec>
+                    <delete>
+                      <fileset dir="src/main/java/com/joelpm/bidiMessages/generated" includes="**/*"/>
+                    </delete>
+                    <copy todir="src/main/java/com/joelpm/bidiMessages/generated">
+                      <fileset dir="target/generated-sources/gen-javabean/com/joelpm/bidiMessages/generated"/>
+                    </copy>
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
