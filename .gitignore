@@ -1,0 +1,9 @@
+**/.classpath
+**/.settings
+**/.project
+**/bin/
+**/tmp/
+**/target/
+**/*.log
+
+Common/src/main/java/com/joelpm/bidiMessages/generated/*.java

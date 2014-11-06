@@ -13,9 +13,9 @@
   
   <dependencies>
     <dependency>
-       <groupId>org.apache</groupId>
-       <artifactId>thrift</artifactId>
-       <version>1.0</version>
+       <groupId>org.apache.thrift</groupId>
+       <artifactId>libthrift</artifactId>
+       <version>0.9.1</version>
     </dependency>
   </dependencies>
   
@@ -38,6 +38,7 @@
                 <configuration>
                   <tasks>
                     <mkdir dir="target/generated-sources" />
+                    <mkdir dir="src/main/java/com/joelpm/bidiMessages/generated"/>
                     <exec executable="/usr/local/bin/thrift">
                       <arg value="--gen" />
                       <arg value="java:beans"/>
