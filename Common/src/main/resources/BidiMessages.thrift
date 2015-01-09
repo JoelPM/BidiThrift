@@ -1,4 +1,4 @@
-#!/usr/local/bin/thrift --gen java:beans:hashcode -O ../
+#!/usr/local/bin/thrift --gen java:beans,hashcode -O ../
 
 namespace java com.joelpm.bidiMessages.generated
 
